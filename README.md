@@ -4,7 +4,7 @@ A noir interrogation game where you play as a detective trying to break a suspec
 
 ## Play
 
-**[Live Demo →](melodic-tapioca-25a9ce.netlify.app)**
+Live Demo on: " melodic-tapioca-25a9ce.netlify.app "
 
 ## How to Run Locally
 
