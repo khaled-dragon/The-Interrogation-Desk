@@ -4,7 +4,7 @@ A noir interrogation game where you play as a detective trying to break a suspec
 
 ## Play
 
-**[Live Demo on GitHub Pages →](https://your-username.github.io/interrogation-desk)**
+**[Live Demo →](melodic-tapioca-25a9ce.netlify.app)**
 
 ## How to Run Locally
 
