@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Interrogation Desk — Project Codex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cutive+Mono&family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="startScreen" class="screen active">
+  <div class="start-desk">
+    <div class="start-lamp-glow"></div>
+    <div class="smoke-container">
+      <div class="smoke-particle"></div>
+      <div class="smoke-particle"></div>
+      <div class="smoke-particle"></div>
+    </div>
+    <div class="case-file">
+      <div class="case-file-stamp">OPEN</div>
+      <div class="case-file-label">Case #001 — Tutorial</div>
+      <div class="case-file-title">The Missing Briefcase<br><br>Suspect: Marcus Webb<br>Charge: Theft</div>
+    </div>
+  </div>
+  <div class="main-title-wrap">
+    <div class="main-title-sub">Project Codex Presents</div>
+    <div class="main-title">The <em>Interrogation</em><br>Desk</div>
+    <div class="main-title-codex">◆ A Detective's Office ◆</div>
+  </div>
+  <div class="start-buttons">
+    <button class="btn-noir primary" onclick="startGame()">New Case</button>
+    <button class="btn-noir secondary" onclick="showHowToPlay()">How to Play</button>
+    <button class="btn-noir secondary" onclick="exitGame()">Exit</button>
+  </div>
+</div>
+
+<div id="gameScreen" class="screen">
+  <div class="room" id="room">
+    <div class="room-bg"></div>
+    <div class="flash-overlay" id="flashOverlay"></div>
+
+    <div class="fan-shadow">
+      <div class="fan-shadow-blade"></div>
+      <div class="fan-shadow-blade"></div>
+      <div class="fan-shadow-blade"></div>
+      <div class="fan-shadow-blade"></div>
+    </div>
+
+    <div class="mirror"></div>
+
+    <div class="fan-wrap">
+      <div class="fan-blades">
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+      </div>
+      <div class="fan-center"></div>
+    </div>
+
+    <div class="wall-clock">
+      <div class="clock-face" id="clockFace">
+        <div class="clock-hand hours"   id="clockHours"></div>
+        <div class="clock-hand minutes" id="clockMinutes"></div>
+        <div class="clock-hand seconds" id="clockSeconds"></div>
+      </div>
+    </div>
+
+    <div class="desk-lamp-glow"></div>
+
+    <div class="evidence-panel">
+      <div class="panel-title">Evidence File</div>
+      <div class="evidence-item" id="ev0"><div class="evidence-dot"></div><span>—</span></div>
+      <div class="evidence-item" id="ev1"><div class="evidence-dot"></div><span>—</span></div>
+      <div class="evidence-item" id="ev2"><div class="evidence-dot"></div><span>—</span></div>
+      <div class="evidence-item" id="ev3"><div class="evidence-dot"></div><span>—</span></div>
+    </div>
+
+    <div class="right-sidebar">
+      <div class="stress-panel">
+        <div class="stress-label">Stress Level</div>
+        <div class="stress-bar-wrap">
+          <div class="stress-bar-fill" id="stressBarFill"></div>
+        </div>
+        <div class="stress-value" id="stressValue">0%</div>
+        <div class="pulse-indicator" id="pulseIndicator">
+          <div class="pulse-beat" style="height:8px"></div>
+          <div class="pulse-beat" style="height:14px"></div>
+          <div class="pulse-beat" style="height:6px"></div>
+          <div class="pulse-beat" style="height:18px"></div>
+          <div class="pulse-beat" style="height:10px"></div>
+          <div class="pulse-beat" style="height:22px"></div>
+          <div class="pulse-beat" style="height:8px"></div>
+          <div class="pulse-beat" style="height:16px"></div>
+          <div class="pulse-beat" style="height:12px"></div>
+          <div class="pulse-beat" style="height:20px"></div>
+        </div>
+        <div class="trust-label">Trust Level</div>
+        <div class="trust-bar-wrap">
+          <div class="trust-bar-fill" id="trustBarFill"></div>
+        </div>
+        <div class="defense-bar-wrap">
+          <div class="defense-label">Defense</div>
+          <div class="defense-bar-bg">
+            <div class="defense-bar-fill" id="defenseBarFill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-brief" id="caseBrief"></div>
+    </div>
+
+    <div class="timer-display">
+      <div class="timer-label">Time Remaining</div>
+      <div class="timer-value" id="timerDisplay">10:00</div>
+    </div>
+
+    <div class="suspect-wrap" id="suspectWrap">
+      <div class="suspect-body">
+        <div class="suspect-shirt">
+          <div class="suspect-shirt-stripe"></div>
+          <div class="suspect-collar-l"></div>
+          <div class="suspect-collar-r"></div>
+        </div>
+      </div>
+      <div class="suspect-neck"></div>
+      <div class="suspect-head" id="suspectHead">
+        <div class="suspect-hair"></div>
+        <div class="suspect-eyes" id="suspectEyes">
+          <div class="suspect-eye" id="eyeLeft"></div>
+          <div class="suspect-eye" id="eyeRight"></div>
+        </div>
+        <div class="suspect-nose"></div>
+        <div class="suspect-mouth" id="suspectMouth"></div>
+        <div class="sweat-drop" id="sweatDrop"></div>
+      </div>
+      <div class="micro-label lie"    id="mlLie"    style="top:-30px;left:50%;transform:translateX(-50%)">⚠ Possible Lie</div>
+      <div class="micro-label guilt"  id="mlGuilt"  style="top:-50px;left:50%;transform:translateX(-50%)">↗ Looking Away</div>
+      <div class="micro-label stress" id="mlStress" style="top:-70px;left:50%;transform:translateX(-50%)">● High Stress</div>
+    </div>
+
+    <div class="desk">
+      <div class="desk-items">
+        <div class="notebook">
+          <div class="notebook-bind"></div>
+          <div class="notebook-lines">
+            <div class="notebook-line"></div>
+            <div class="notebook-line"></div>
+            <div class="notebook-line"></div>
+          </div>
+        </div>
+        <div class="coffee-cup">
+          <div class="cup-steam">
+            <div class="steam-wisp"></div>
+            <div class="steam-wisp"></div>
+            <div class="steam-wisp"></div>
+          </div>
+          <div class="cup-body"></div>
+          <div class="cup-handle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+  </div>
+
+  <div class="dialogue-area">
+    <div class="dialogue-speaker" id="dialogueSpeaker">—</div>
+    <div class="dialogue-text"    id="dialogueText"></div>
+  </div>
+
+  <div class="choice-panel" id="choicePanel"></div>
+</div>
+
+<div id="howToPlayScreen" class="screen">
+  <div class="htp-header">
+    <div class="htp-label">Detective's Handbook</div>
+    <div class="htp-title">How to Play</div>
+    <div class="htp-divider"></div>
+  </div>
+  <div class="htp-grid">
+
+    <div class="htp-card">
+      <span class="htp-card-icon">🎯</span>
+      <div class="htp-card-title">The Objective</div>
+      <div class="htp-card-body">
+        You are a detective. Across the desk sits a suspect — one of <b style="color:var(--amber-pale)">10 different cases</b>, picked randomly every game.<br><br>
+        Your mission: push the suspect's <b style="color:#e74c3c">Stress Level</b> to 100 to extract a full confession — before the <b style="color:var(--amber)">10-minute timer</b> runs out.
+      </div>
+    </div>
+
+    <div class="htp-card">
+      <span class="htp-card-icon">📊</span>
+      <div class="htp-card-title">Watch the Meters</div>
+      <div class="htp-card-body">Three bars tell you how the interrogation is going:</div>
+      <div style="margin-top:12px">
+        <div class="htp-meter-row">
+          <div class="htp-meter-label">Stress</div>
+          <div class="htp-meter-bar"><div class="htp-meter-fill" style="width:75%;background:#e74c3c"></div></div>
+          <div class="htp-meter-tip" style="color:#e74c3c">75%</div>
+        </div>
+        <div class="htp-card-body" style="font-size:11px;margin-bottom:10px">⬆ Get this to 100 to win</div>
+        <div class="htp-meter-row">
+          <div class="htp-meter-label">Trust</div>
+          <div class="htp-meter-bar"><div class="htp-meter-fill" style="width:45%;background:#3498db"></div></div>
+          <div class="htp-meter-tip" style="color:#3498db">45%</div>
+        </div>
+        <div class="htp-card-body" style="font-size:11px;margin-bottom:10px">⬆ Higher trust = easier confession</div>
+        <div class="htp-meter-row">
+          <div class="htp-meter-label">Defense</div>
+          <div class="htp-meter-bar"><div class="htp-meter-fill" style="width:30%;background:#8e44ad"></div></div>
+          <div class="htp-meter-tip" style="color:#8e44ad">30%</div>
+        </div>
+        <div class="htp-card-body" style="font-size:11px">⬆ Too high = suspect shuts down ❌</div>
+      </div>
+    </div>
+
+    <div class="htp-card full-width">
+      <span class="htp-card-icon">🕹️</span>
+      <div class="htp-card-title">How Actions Work</div>
+      <div class="htp-card-body" style="margin-bottom:4px">After every response from the suspect, <b style="color:var(--amber-pale)">3 choices</b> appear at the bottom. Pick one — each choice is a fully written action your detective takes. Choices rotate and refresh so you never see the same set twice.</div>
+      <div class="htp-actions-grid">
+        <div class="htp-action-pill">
+          <div class="htp-action-icon">❓</div>
+          <div>
+            <div class="htp-action-name">Question</div>
+            <div class="htp-action-desc">Ask a direct question. Gradually raises stress and unlocks evidence as you dig deeper.</div>
+          </div>
+        </div>
+        <div class="htp-action-pill">
+          <div class="htp-action-icon">👊</div>
+          <div>
+            <div class="htp-action-name">*SLAM*</div>
+            <div class="htp-action-desc">Slam the desk for a big stress spike. Overuse raises the <b style="color:#8e44ad">Defense</b> meter fast — use sparingly!</div>
+          </div>
+        </div>
+        <div class="htp-action-pill">
+          <div class="htp-action-icon">👁️</div>
+          <div>
+            <div class="htp-action-name">Stare in silence</div>
+            <div class="htp-action-desc">Pure psychological pressure. Slow but steady. Triggers micro-expressions like eye twitching.</div>
+          </div>
+        </div>
+        <div class="htp-action-pill">
+          <div class="htp-action-icon">🤫</div>
+          <div>
+            <div class="htp-action-name">Threatening whisper</div>
+            <div class="htp-action-desc">Lean in close with a calculated threat. High impact. Drops the music to an eerie low tone.</div>
+          </div>
+        </div>
+        <div class="htp-action-pill" style="grid-column:1/-1">
+          <div class="htp-action-icon">📁</div>
+          <div>
+            <div class="htp-action-name">Show the Evidence</div>
+            <div class="htp-action-desc">Appears as a choice once evidence is unlocked. Each piece triggers a unique, case-specific reaction. The most powerful move in the game.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-card">
+      <span class="htp-card-icon">🗂️</span>
+      <div class="htp-card-title">Unlocking Evidence</div>
+      <div class="htp-card-body">Evidence unlocks automatically as you keep questioning. Once found, it appears as a choice or you can click it directly from the <b style="color:var(--amber-pale)">top-left panel</b>.</div>
+      <div class="htp-evidence-list">
+        <div class="htp-ev-item"><div class="htp-ev-dot"></div><span>Evidence #1</span><span class="htp-ev-when">After Q2</span></div>
+        <div class="htp-ev-item"><div class="htp-ev-dot"></div><span>Evidence #2</span><span class="htp-ev-when">After Q3</span></div>
+        <div class="htp-ev-item"><div class="htp-ev-dot"></div><span>Evidence #3</span><span class="htp-ev-when">After Q4</span></div>
+        <div class="htp-ev-item"><div class="htp-ev-dot"></div><span>Evidence #4</span><span class="htp-ev-when">After Q5</span></div>
+      </div>
+    </div>
+
+    <div class="htp-card">
+      <span class="htp-card-icon">🎭</span>
+      <div class="htp-card-title">Read the Suspect</div>
+      <div class="htp-card-body">Watch the suspect's face — it reveals hidden information:</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+        <div class="htp-ev-item">
+          <span style="font-size:16px">👀</span>
+          <div><div style="color:var(--amber-pale);font-size:12px;font-family:'Special Elite',cursive">Eyes dart sideways</div><div style="font-size:12px">Probably lying</div></div>
+        </div>
+        <div class="htp-ev-item">
+          <span style="font-size:16px">😓</span>
+          <div><div style="color:var(--amber-pale);font-size:12px;font-family:'Special Elite',cursive">Sweating + red face</div><div style="font-size:12px">Stress very high — push harder</div></div>
+        </div>
+        <div class="htp-ev-item">
+          <span style="font-size:16px">👇</span>
+          <div><div style="color:var(--amber-pale);font-size:12px;font-family:'Special Elite',cursive">Looks away</div><div style="font-size:12px">Guilt — good sign, keep going</div></div>
+        </div>
+        <div class="htp-ev-item">
+          <span style="font-size:16px">🔔</span>
+          <div><div style="color:var(--amber-pale);font-size:12px;font-family:'Special Elite',cursive">Confession ring chime</div><div style="font-size:12px">He's on the verge of breaking!</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-card full-width">
+      <span class="htp-card-icon">🏆</span>
+      <div class="htp-card-title">Winning Strategy</div>
+      <div class="htp-card-body">The 3 choices rotate automatically. A good sequence to aim for:</div>
+      <div class="htp-timeline">
+        <div class="htp-step">Question ×2</div><div class="htp-arrow">→</div>
+        <div class="htp-step">Stare ×1</div><div class="htp-arrow">→</div>
+        <div class="htp-step">Question ×2</div><div class="htp-arrow">→</div>
+        <div class="htp-step">Evidence ×2</div><div class="htp-arrow">→</div>
+        <div class="htp-step">Whisper ×1</div><div class="htp-arrow">→</div>
+        <div class="htp-step">Slam ×1</div><div class="htp-arrow">→</div>
+        <div class="htp-step">🎉 Confession</div>
+      </div>
+      <div class="htp-warning-box">
+        ⚠ <strong>Warning:</strong> The <b>*SLAM*</b> choice raises the Defense meter fast. If Defense hits 75%, the suspect demands a lawyer and the interrogation ends immediately — <strong>you lose.</strong>
+      </div>
+    </div>
+
+  </div>
+  <button class="btn-noir secondary htp-back-btn" onclick="goToMenuFromHTP()">← Back to Menu</button>
+</div>
+
+<!-- ==================== END SCREEN ==================== -->
+<div id="endScreen" class="screen">
+  <div class="end-title" id="endTitle">Case Closed</div>
+  <div class="end-subtitle" id="endSubtitle">The truth always surfaces.</div>
+  <div class="end-stats">
+    <div class="end-stat"><span class="end-stat-val" id="endTime">—</span><span class="end-stat-label">Time Used</span></div>
+    <div class="end-stat"><span class="end-stat-val" id="endActions">—</span><span class="end-stat-label">Actions Taken</span></div>
+    <div class="end-stat"><span class="end-stat-val" id="endEvidence">—</span><span class="end-stat-label">Evidence Found</span></div>
+  </div>
+  <button class="btn-noir primary" onclick="restartGame()" style="margin-top:10px">Try Again</button>
+  <button class="btn-noir secondary" onclick="goToMenu()" style="margin-top:12px">Main Menu</button>
+</div>
+
+<script src="js/audio.js"></script>
+<script src="js/suspects.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/game.js"></script>
+
+</body>
+</html>
