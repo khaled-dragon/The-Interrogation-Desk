@@ -1,10 +1,10 @@
 # The Interrogation Desk — Project Codex
 
-A noir interrogation game where you play as a detective trying to break a suspect's composure and extract a confession — through questions, silence, threats, and evidence. 10 different cases, each with a unique suspect and story, picked randomly every run.
+A noir interrogation game where you play as a detective trying to break a suspect's composure and extract a confession; through questions, silence, threats, and evidence. 10 different cases, each with a unique suspect and story, picked randomly every run.
 
 ## Play
 
-Live Demo on: " melodic-tapioca-25a9ce.netlify.app "
+Live Demo on: " https://the-integration-desk.netlify.app/ "
 
 ## How to Run Locally
 
