@@ -23,13 +23,6 @@ interrogation-desk/
 └── README.md
 ```
 
-## How to Deploy on GitHub Pages
-
-1. Push this folder to a GitHub repo
-2. Go to **Settings → Pages**
-3. Set source to **main branch / root**
-4. Your game will be live at `https://your-username.github.io/repo-name`
-
 ## The 10 Cases
 
 | # | Suspect | Crime |
